@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingCTA from '../components/content/BookingCTA.astro';
+import { company } from '../data/company';
+
+const principles = ['Especialización', 'Sostenibilidad', 'Interoperabilidad', 'Seguridad y continuidad', 'Transferencia'];
+const team = [
+  ['Hernán Lagos', 'Fundador y CEO. Ingeniero en Informática, especializado en repositorios, bibliotecas digitales, metadatos, arquitectura de software y plataformas DSpace.'],
+  ['Simón Hernández', 'Desarrollador de sistemas de información, con experiencia en diseño de soluciones, software, bases documentales y sistemas de descubrimiento.'],
+  ['Hernán Carvajal', 'Ingeniero Civil en Computación e Informática, especializado en dirección de proyectos, ingeniería de software, sistemas abiertos e infraestructura cloud.'],
+  ['Nidia Berríos', 'Diseñadora gráfica especializada en arquitectura de información, experiencia de usuario, interacción y desarrollo frontend.'],
+];
+---
+
+<BaseLayout seo={{ title: 'Empresa', description: 'D-Consultores es Lagos Digital Consultores SpA, empresa chilena especializada en sistemas digitales de información y conocimiento.', path: '/empresa/' }}>
+  <section class="bg-surface py-section-sm">
+    <div class="mx-auto grid max-w-content gap-10 px-5 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-8">
+      <div>
+        <p class="font-black uppercase tracking-wide text-brand-orange">Empresa</p>
+        <h1 class="mt-3 text-4xl font-black text-brand-navy md:text-5xl">Tecnología especializada para gestionar información y conocimiento.</h1>
+      </div>
+      <div class="prose">
+        <p>D-Consultores es la marca de {company.legalName}, empresa chilena especializada en la creación, implementación y continuidad de sistemas digitales de información y conocimiento.</p>
+        <p>Trabajamos con universidades, organismos públicos y organizaciones que necesitan gestionar, preservar, conectar y difundir recursos digitales de forma segura, interoperable y sostenible.</p>
+        <p>Nuestra experiencia combina arquitectura de software, repositorios digitales, datos de investigación, metadatos, infraestructura, experiencia de usuario y soporte operativo.</p>
+        <h2>Propósito</h2>
+        <p>{company.purpose}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-page py-section-sm">
+    <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-black text-brand-navy">Principios de trabajo</h2>
+      <div class="mt-8 grid gap-4 md:grid-cols-5">
+        {principles.map((item) => (
+          <article class="border-t border-border pt-5">
+            <h3 class="font-black text-brand-navy">{item}</h3>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-surface py-section-sm">
+    <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-black text-brand-navy">Equipo</h2>
+      <p class="mt-4 max-w-3xl leading-8 text-muted">Perfiles iniciales sujetos a validación antes de publicación final.</p>
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        {team.map(([name, bio]) => (
+          <article class="rounded-card border border-border p-6">
+            <h3 class="text-xl font-black text-brand-navy">{name}</h3>
+            <p class="mt-3 leading-7 text-muted">{bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <BookingCTA />
+</BaseLayout>

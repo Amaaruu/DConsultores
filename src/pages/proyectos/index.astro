@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/content/ProjectCard.astro';
+import BookingCTA from '../../components/content/BookingCTA.astro';
+
+const allProjects = await getCollection('projects');
+const published = allProjects.filter((project) => !project.data.draft && project.data.publicationApproved);
+const candidates = allProjects.filter((project) => project.data.draft || !project.data.publicationApproved);
+---
+
+<BaseLayout seo={{ title: 'Proyectos', description: 'Proyectos y casos de D-Consultores en repositorios, bibliotecas digitales, plataformas de informacion y continuidad operativa.', path: '/proyectos/' }}>
+  <section class="bg-page py-section-sm">
+    <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
+      <p class="font-black uppercase tracking-wide text-brand-orange">Proyectos</p>
+      <h1 class="mt-3 text-4xl font-black text-brand-navy md:text-5xl">Experiencia aplicada a plataformas institucionales.</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">Proyectos en los que articulamos necesidades institucionales, arquitectura, implementación, integración, capacitación y continuidad operativa.</p>
+      {published.length > 0 && (
+        <div class="mt-10 grid gap-5 md:grid-cols-2">
+          {published.map((project) => <ProjectCard project={project} />)}
+        </div>
+      )}
+      <section class="mt-12 border-t border-border pt-8">
+        <h2 class="text-2xl font-black text-brand-navy">Casos candidatos por validar</h2>
+        <p class="mt-3 max-w-3xl leading-7 text-muted">Referencias recuperadas desde WordPress. Deben confirmarse alcance, autorización pública, imágenes y resultados antes de publicarse como casos completos.</p>
+        <div class="mt-6 grid gap-5 md:grid-cols-2">
+          {candidates.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </section>
+    </div>
+  </section>
+  <BookingCTA />
+</BaseLayout>

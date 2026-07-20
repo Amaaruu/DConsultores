@@ -1,0 +1,22 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import BookingCTA from '../components/content/BookingCTA.astro';
+const { project } = Astro.props;
+---
+
+<BaseLayout seo={{ title: project.data.title, description: project.data.description, path: `/proyectos/${project.id}/` }}>
+  <article class="bg-surface py-section-sm">
+    <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ href: '/proyectos/', label: 'Proyectos' }, { label: project.data.title }]} />
+      <p class="mt-8 font-black uppercase tracking-wide text-brand-orange">Caso</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-black text-brand-navy md:text-5xl">{project.data.title}</h1>
+      <p class="mt-4 text-lg font-bold text-muted">{project.data.clientDisplay ? project.data.client : 'Organización confidencial'}</p>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">{project.data.description}</p>
+      <div class="prose mt-10">
+        <slot />
+      </div>
+    </div>
+  </article>
+  <BookingCTA />
+</BaseLayout>

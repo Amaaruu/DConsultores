@@ -1,0 +1,9 @@
+---
+import { formatDate } from '../../utils/dates';
+const { post } = Astro.props;
+---
+
+<p class="text-sm font-bold text-muted">
+  {formatDate(post.data.date)}
+  {post.data.updatedDate && <span> · Actualizado {formatDate(post.data.updatedDate)}</span>}
+</p>

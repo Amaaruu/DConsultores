@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BookingCTA from '../../components/content/BookingCTA.astro';
+import ServiceCard from '../../components/content/ServiceCard.astro';
+
+const services = (await getCollection('services'))
+  .filter((service) => !service.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout seo={{ title: 'Servicios', description: 'Servicios especializados para repositorios digitales, DSpace, Dataverse, busqueda, infraestructura e IA aplicada.', path: '/servicios/' }}>
+  <section class="bg-surface py-section-sm">
+    <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
+      <p class="font-black uppercase tracking-wide text-brand-orange">Servicios</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-black text-brand-navy md:text-5xl">Soluciones especializadas para información digital.</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">Acompañamos todo el ciclo de una plataforma: levantamiento, arquitectura, implementación, personalización, migración, integración, capacitación, soporte y evolución.</p>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {services.map((service) => <ServiceCard service={service} />)}
+      </div>
+    </div>
+  </section>
+  <BookingCTA />
+</BaseLayout>

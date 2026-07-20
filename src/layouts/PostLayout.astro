@@ -1,0 +1,35 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import PostMeta from '../components/content/PostMeta.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { absoluteUrl } from '../utils/seo';
+const { post } = Astro.props;
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.date).toISOString(),
+  author: { '@type': 'Organization', name: post.data.author },
+  url: absoluteUrl(`/publicaciones/${post.id}/`),
+};
+---
+
+<BaseLayout seo={{ title: post.data.title, description: post.data.description, path: `/publicaciones/${post.id}/`, type: 'article' }}>
+  <JsonLd data={articleJsonLd} />
+  <article class="bg-surface py-section-sm">
+    <div class="mx-auto max-w-reading px-5 sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ href: '/publicaciones/', label: 'Publicaciones' }, { label: post.data.title }]} />
+      <div class="mt-8">
+        <PostMeta post={post} />
+      </div>
+      <h1 class="mt-5 text-4xl font-black tracking-normal text-brand-navy md:text-5xl">{post.data.title}</h1>
+      <p class="mt-5 text-xl leading-8 text-muted">{post.data.description}</p>
+      <div class="prose mt-10">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

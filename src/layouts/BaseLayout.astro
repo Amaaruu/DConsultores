@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+import SeoHead from '../components/seo/SeoHead.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import SiteHeader from '../components/navigation/SiteHeader.astro';
+import SiteFooter from '../components/navigation/SiteFooter.astro';
+import SkipLink from '../components/navigation/SkipLink.astro';
+import { organizationJsonLd, type SeoInput } from '../utils/seo';
+
+const { seo } = Astro.props as { seo: SeoInput };
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <SeoHead {...seo} />
+    <JsonLd data={organizationJsonLd()} />
+  </head>
+  <body>
+    <SkipLink />
+    <SiteHeader />
+    <main id="contenido">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

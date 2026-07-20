@@ -1,0 +1,17 @@
+---
+const { project } = Astro.props;
+const data = project.data ?? project;
+const href = project.id && data.publicationApproved ? `/proyectos/${project.id}/` : undefined;
+---
+
+<article class="rounded-card border border-border bg-surface p-6">
+  <p class="text-sm font-bold text-brand-orange">{data.clientDisplay === false ? 'Caso candidato' : data.client}</p>
+  <h2 class="mt-2 text-2xl font-black text-brand-navy">
+    {href ? <a href={href} class="hover:text-brand-orange">{data.title}</a> : data.title}
+  </h2>
+  <p class="mt-4 leading-7 text-muted">{data.description ?? data.context}</p>
+  {data.result && <p class="mt-4 text-sm font-bold text-ink">Resultado: {data.result}</p>}
+  <ul class="mt-5 flex flex-wrap gap-2">
+    {(data.technologies ?? data.capabilities ?? []).map((item: string) => <li class="rounded-full bg-page px-3 py-1 text-xs font-bold text-brand-navy">{item}</li>)}
+  </ul>
+</article>

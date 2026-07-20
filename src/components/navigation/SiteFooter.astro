@@ -1,0 +1,27 @@
+---
+import Logo from './Logo.astro';
+import { navItems, site } from '../../data/site';
+import { company } from '../../data/company';
+---
+
+<footer class="border-t border-border bg-brand-navy text-white">
+  <div class="mx-auto grid max-w-wide gap-10 px-5 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
+    <div>
+      <Logo class="h-12 w-auto brightness-0 invert" />
+      <p class="mt-5 max-w-md text-sm leading-7 text-white/75">{site.description}</p>
+    </div>
+    <nav aria-label="Navegacion secundaria" class="grid gap-3">
+      <p class="font-black">Sitio</p>
+      {navItems.map((item) => <a class="text-sm text-white/75 hover:text-white" href={item.href}>{item.label}</a>)}
+    </nav>
+    <div>
+      <p class="font-black">Contacto</p>
+      <a class="mt-3 block text-sm text-white/75 hover:text-white" href={`mailto:${company.email}`}>{company.email}</a>
+      <p class="mt-3 text-sm text-white/60">{company.location}</p>
+      <a class="mt-3 inline-flex rounded-full bg-white px-5 py-3 text-sm font-black text-brand-navy" target="_blank" href={site.bookingUrl}>Agendar reunión</a>
+    </div>
+  </div>
+  <div class="border-t border-white/10 px-5 py-5 text-center text-xs text-white/60">
+    © {new Date().getFullYear()} {company.legalName}. Todos los derechos reservados.
+  </div>
+</footer>

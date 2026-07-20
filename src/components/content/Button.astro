@@ -1,0 +1,12 @@
+---
+const { href, variant = 'primary', class: className = '', target } = Astro.props;
+const styles = {
+  primary: 'bg-brand-orange text-white hover:bg-brand-orange-dark',
+  secondary: 'border border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white',
+  light: 'bg-white text-brand-navy hover:bg-brand-orange-soft',
+};
+---
+
+<a href={href} target={target} rel={target === '_blank' ? 'noopener noreferrer' : undefined} class:list={['inline-flex min-h-11 items-center justify-center rounded-full px-5 py-3 text-sm font-black transition', styles[variant as keyof typeof styles], className]}>
+  <slot />
+</a>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/content/Breadcrumbs.astro';
+import BookingCTA from '../components/content/BookingCTA.astro';
+const { service, related = [] } = Astro.props;
+---
+
+<BaseLayout seo={{ title: service.data.title, description: service.data.description, path: `/servicios/${service.id}/` }}>
+  <article class="bg-surface py-section-sm">
+    <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
+      <Breadcrumbs items={[{ href: '/servicios/', label: 'Servicios' }, { label: service.data.shortTitle }]} />
+      <p class="mt-8 font-black uppercase tracking-wide text-brand-orange">Servicio</p>
+      <h1 class="mt-3 max-w-4xl text-4xl font-black text-brand-navy md:text-5xl">{service.data.title}</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">{service.data.description}</p>
+      <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_18rem]">
+        <div class="prose">
+          <slot />
+        </div>
+        <aside class="h-fit rounded-card border border-border bg-page p-5">
+          <h2 class="text-lg font-black text-brand-navy">Capacidades</h2>
+          <ul class="mt-4 grid gap-2 text-sm text-muted">
+            {service.data.capabilities.map((item: string) => <li>{item}</li>)}
+          </ul>
+          {service.data.audiences.length > 0 && (
+            <>
+              <h2 class="mt-6 text-lg font-black text-brand-navy">Dirigido a</h2>
+              <ul class="mt-4 grid gap-2 text-sm text-muted">
+                {service.data.audiences.map((item: string) => <li>{item}</li>)}
+              </ul>
+            </>
+          )}
+        </aside>
+      </div>
+      {related.length > 0 && (
+        <section class="mt-14 border-t border-border pt-8">
+          <h2 class="text-2xl font-black text-brand-navy">Servicios relacionados</h2>
+          <div class="mt-5 flex flex-wrap gap-3">
+            {related.map((item: any) => <a class="rounded-full border border-border px-4 py-2 text-sm font-bold text-brand-navy hover:text-brand-orange" href={`/servicios/${item.id}/`}>{item.data.shortTitle}</a>)}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+  <BookingCTA title={service.data.cta} />
+</BaseLayout>

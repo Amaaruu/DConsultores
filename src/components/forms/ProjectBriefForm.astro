@@ -1,0 +1,317 @@
+---
+import {
+  contentTypes,
+  currentSituations,
+  estimatedBudgets,
+  migrationOptions,
+  projectStages,
+  serviceTypes,
+  targetTimeframes,
+  userTypes,
+} from '../../utils/validation';
+
+const labels: Record<string, string> = {
+  'repositorio-digital': 'Implementación de repositorio digital',
+  'dspace-dataverse': 'DSpace o Dataverse',
+  'migracion-actualizacion': 'Migración o actualización de plataforma',
+  'desarrollo-plataforma': 'Desarrollo de una plataforma',
+  'infraestructura-devops': 'Infraestructura o DevOps',
+  ia: 'Integración con inteligencia artificial',
+  'soporte-mantencion': 'Soporte o mantención',
+  otro: 'Otro',
+  nuevo: 'No, es un proyecto nuevo',
+  mejorar: 'Sí, queremos mejorarlo',
+  actualizar: 'Sí, queremos actualizarlo',
+  'migrar-reemplazar': 'Sí, queremos migrarlo o reemplazarlo',
+  'no-definido': 'Aún no está definido',
+  documentos: 'Documentos',
+  'publicaciones-academicas': 'Publicaciones académicas',
+  tesis: 'Tesis',
+  'datos-investigacion': 'Datos de investigación',
+  fotografias: 'Fotografías',
+  'videos-audios': 'Videos o audios',
+  'archivos-historicos': 'Archivos históricos',
+  'publico-general': 'Público general',
+  funcionarios: 'Funcionarios',
+  investigadores: 'Investigadores',
+  academicos: 'Académicos',
+  estudiantes: 'Estudiantes',
+  'administradores-internos': 'Administradores internos',
+  yes: 'Sí',
+  no: 'No',
+  unknown: 'Aún no está definido',
+  'idea-inicial': 'Es una idea inicial',
+  'levantando-requerimientos': 'Estamos levantando requerimientos',
+  'necesitamos-cotizacion': 'Necesitamos una cotización',
+  'licitacion-tdr': 'Existe una licitación o términos de referencia',
+  'en-ejecucion': 'Ya está en ejecución',
+  'plataforma-con-problemas': 'Existe una plataforma con problemas',
+  'lo-antes-posible': 'Lo antes posible',
+  '1-mes': 'Dentro de 1 mes',
+  '2-3-meses': 'Dentro de 2 a 3 meses',
+  '4-6-meses': 'Dentro de 4 a 6 meses',
+  'mas-adelante': 'Más adelante',
+  'fecha-especifica': 'Existe una fecha específica',
+  'menos-5m': 'Menos de $5.000.000 CLP',
+  '5m-10m': 'Entre $5.000.000 y $10.000.000 CLP',
+  '10m-25m': 'Entre $10.000.000 y $25.000.000 CLP',
+  'mas-25m': 'Más de $25.000.000 CLP',
+  reunion: 'Prefiero conversarlo en una reunión',
+};
+
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const today = new Date().toISOString().slice(0, 10);
+---
+
+<form id="project-brief" class="brief-form grid gap-6 rounded-card border border-border bg-surface p-6" action="/api/contacto" method="post">
+  <div class="flex items-center justify-between gap-4">
+    <div>
+      <p class="text-sm font-black uppercase tracking-wide text-brand-orange">Brief inicial</p>
+      <h2 class="mt-1 text-2xl font-black text-brand-navy">Cuéntanos tu proyecto</h2>
+    </div>
+    <p data-brief-progress class="hidden text-sm font-bold text-muted">Paso 1 de 6</p>
+  </div>
+
+  <fieldset data-brief-step class="grid gap-5">
+    <legend class="text-xl font-black text-brand-navy">¿En qué podemos ayudarte?</legend>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {serviceTypes.map((value) => (
+        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
+          <input type="radio" name="serviceType" value={value} required />
+          {labels[value]}
+        </label>
+      ))}
+    </div>
+    <div class="grid gap-2" data-conditional="serviceType:otro">
+      <label class="font-bold text-brand-navy" for="serviceTypeOther">Describe brevemente la necesidad</label>
+      <input class="min-h-11 rounded-control border border-border px-3" id="serviceTypeOther" name="serviceTypeOther" maxlength="100" />
+    </div>
+  </fieldset>
+
+  <fieldset data-brief-step class="grid gap-5">
+    <legend class="text-xl font-black text-brand-navy">Objetivo y situación actual</legend>
+    <div class="grid gap-2">
+      <label class="font-bold text-brand-navy" for="objective">¿Qué necesitas resolver con este proyecto?</label>
+      <textarea class="min-h-36 rounded-control border border-border px-3 py-3" id="objective" name="objective" required minlength="20" maxlength="1500"></textarea>
+    </div>
+    <div class="grid gap-3">
+      <p class="font-bold text-brand-navy">¿Actualmente existe una plataforma o sistema relacionado?</p>
+      {currentSituations.map((value) => (
+        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
+          <input type="radio" name="currentSituation" value={value} required />
+          {labels[value]}
+        </label>
+      ))}
+    </div>
+    <div class="grid gap-2" data-conditional="currentSituation:mejorar,actualizar,migrar-reemplazar">
+      <label class="font-bold text-brand-navy" for="currentPlatform">¿Qué plataforma o sistema utilizan actualmente?</label>
+      <input class="min-h-11 rounded-control border border-border px-3" id="currentPlatform" name="currentPlatform" maxlength="200" />
+    </div>
+  </fieldset>
+
+  <fieldset data-brief-step class="grid gap-5">
+    <legend class="text-xl font-black text-brand-navy">Contenidos, usuarios y migración</legend>
+    <div class="grid gap-3">
+      <p class="font-bold text-brand-navy">¿Qué tipo de contenidos administrará la plataforma?</p>
+      <div class="grid gap-2 sm:grid-cols-2">
+        {contentTypes.map((value) => (
+          <label class="flex gap-3 rounded-control border border-border p-3 text-sm text-ink">
+            <input type="checkbox" name="contentTypes" value={value} />
+            {labels[value]}
+          </label>
+        ))}
+      </div>
+    </div>
+    <div class="grid gap-3">
+      <p class="font-bold text-brand-navy">¿Quiénes utilizarán la plataforma?</p>
+      <div class="grid gap-2 sm:grid-cols-2">
+        {userTypes.map((value) => (
+          <label class="flex gap-3 rounded-control border border-border p-3 text-sm text-ink">
+            <input type="checkbox" name="userTypes" value={value} />
+            {labels[value]}
+          </label>
+        ))}
+      </div>
+    </div>
+    <div class="grid gap-3">
+      <p class="font-bold text-brand-navy">¿Será necesario migrar información desde otro sistema?</p>
+      {migrationOptions.map((value) => (
+        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
+          <input type="radio" name="migrationRequired" value={value} required />
+          {labels[value]}
+        </label>
+      ))}
+    </div>
+    <div class="grid gap-4 md:grid-cols-2" data-conditional="migrationRequired:yes">
+      <label class="grid gap-2 font-bold text-brand-navy">Sistema o fuente de origen<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="migrationSource" maxlength="300" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Cantidad aproximada de registros<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="approximateRecords" maxlength="300" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Cantidad aproximada de archivos<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="approximateFiles" maxlength="300" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Formatos conocidos<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="knownFormats" maxlength="300" /></label>
+    </div>
+  </fieldset>
+
+  <fieldset data-brief-step class="grid gap-5">
+    <legend class="text-xl font-black text-brand-navy">Estado, plazo y presupuesto</legend>
+    <div class="grid gap-3">
+      <p class="font-bold text-brand-navy">¿En qué etapa se encuentra el proyecto?</p>
+      {projectStages.map((value) => (
+        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
+          <input type="radio" name="projectStage" value={value} required />
+          {labels[value]}
+        </label>
+      ))}
+    </div>
+    <div class="grid gap-2">
+      <label class="font-bold text-brand-navy" for="targetTimeframe">¿Cuándo necesitas que el proyecto esté operativo?</label>
+      <select class="min-h-11 rounded-control border border-border px-3" id="targetTimeframe" name="targetTimeframe">
+        <option value="">Selecciona una opción</option>
+        {targetTimeframes.map((value) => <option value={value}>{labels[value]}</option>)}
+      </select>
+    </div>
+    <div class="grid gap-2" data-conditional="targetTimeframe:fecha-especifica">
+      <label class="font-bold text-brand-navy" for="targetDate">Fecha objetivo</label>
+      <input class="min-h-11 rounded-control border border-border px-3" id="targetDate" name="targetDate" type="date" min={today} />
+    </div>
+    <div class="grid gap-2">
+      <label class="font-bold text-brand-navy" for="estimatedBudget">¿Existe un presupuesto estimado?</label>
+      <select class="min-h-11 rounded-control border border-border px-3" id="estimatedBudget" name="estimatedBudget">
+        <option value="">Selecciona una opción</option>
+        {estimatedBudgets.map((value) => <option value={value}>{labels[value]}</option>)}
+      </select>
+    </div>
+  </fieldset>
+
+  <fieldset data-brief-step class="grid gap-5">
+    <legend class="text-xl font-black text-brand-navy">Datos de contacto</legend>
+    <label class="grid gap-2 font-bold text-brand-navy">Nombre y apellido<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="name" autocomplete="name" required minlength="2" maxlength="100" /></label>
+    <label class="grid gap-2 font-bold text-brand-navy">Empresa u organización<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="organization" autocomplete="organization" required minlength="2" maxlength="150" /></label>
+    <label class="grid gap-2 font-bold text-brand-navy">Cargo, opcional<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="role" maxlength="100" /></label>
+    <label class="grid gap-2 font-bold text-brand-navy">Correo electrónico<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+    <label class="grid gap-2 font-bold text-brand-navy">Teléfono, opcional<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="phone" autocomplete="tel" maxlength="30" /></label>
+    <label class="grid gap-2 font-bold text-brand-navy">Comentarios adicionales, opcional<textarea class="min-h-28 rounded-control border border-border px-3 py-3 font-normal" name="additionalComments" maxlength="2000"></textarea></label>
+    <div class="hidden" aria-hidden="true">
+      <label for="website">Sitio web</label>
+      <input id="website" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+    {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey}></div>}
+    <label class="flex gap-3 text-sm leading-6 text-muted">
+      <input class="mt-1 size-4" type="checkbox" name="privacyConsent" required />
+      Acepto que D-Consultores utilice estos datos para responder mi solicitud.
+    </label>
+  </fieldset>
+
+  <fieldset data-brief-step class="grid gap-5">
+    <legend class="text-xl font-black text-brand-navy">Revisión y envío</legend>
+    <div data-brief-summary class="grid gap-3 rounded-control bg-page p-4 text-sm leading-6 text-muted">
+      Completa los pasos anteriores para revisar tus respuestas.
+    </div>
+    <p data-brief-status class="text-sm font-bold text-muted" role="status" aria-live="polite"></p>
+    <button data-brief-submit class="min-h-11 rounded-full bg-brand-orange px-5 py-3 font-black text-white hover:bg-brand-orange-dark" type="submit">
+      Enviar brief
+    </button>
+  </fieldset>
+
+  <div data-brief-controls class="hidden items-center justify-between gap-3 border-t border-border pt-5">
+    <button data-brief-prev class="min-h-11 rounded-full border border-brand-navy px-5 py-3 text-sm font-black text-brand-navy" type="button">Atrás</button>
+    <button data-brief-next class="min-h-11 rounded-full bg-brand-navy px-5 py-3 text-sm font-black text-white" type="button">Siguiente</button>
+  </div>
+</form>
+
+{turnstileKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<script>
+  const form = document.querySelector('#project-brief');
+  if (form instanceof HTMLFormElement) {
+    const steps = Array.from(form.querySelectorAll('[data-brief-step]'));
+    const progress = form.querySelector('[data-brief-progress]');
+    const controls = form.querySelector('[data-brief-controls]');
+    const prev = form.querySelector('[data-brief-prev]');
+    const next = form.querySelector('[data-brief-next]');
+    const summary = form.querySelector('[data-brief-summary]');
+    const status = form.querySelector('[data-brief-status]');
+    const submit = form.querySelector('[data-brief-submit]');
+    let currentStep = 0;
+
+    controls?.classList.remove('hidden');
+    controls?.classList.add('flex');
+    progress?.classList.remove('hidden');
+
+    const readLabel = (name, value) => {
+      const field = form.elements.namedItem(name);
+      if (field instanceof HTMLSelectElement) {
+        return field.selectedOptions[0]?.textContent?.trim() || value;
+      }
+      const input = form.querySelector(`[name="${name}"][value="${CSS.escape(value)}"]`);
+      return input?.closest('label')?.textContent?.trim() || value;
+    };
+
+    const selected = (name) => {
+      const input = form.querySelector(`[name="${name}"]:checked`);
+      return input instanceof HTMLInputElement ? readLabel(name, input.value) : 'Sin respuesta';
+    };
+
+    const checkedList = (name) =>
+      Array.from(form.querySelectorAll(`[name="${name}"]:checked`))
+        .map((input) => input instanceof HTMLInputElement ? readLabel(name, input.value) : '')
+        .filter(Boolean)
+        .join(', ') || 'Sin respuesta';
+
+    const valueOf = (name) => {
+      const field = form.elements.namedItem(name);
+      return field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement ? field.value.trim() : '';
+    };
+
+    const updateConditionals = () => {
+      form.querySelectorAll('[data-conditional]').forEach((element) => {
+        const [name, rawValues] = element.getAttribute('data-conditional')?.split(':') || [];
+        const values = rawValues?.split(',') || [];
+        const active = values.includes(valueOf(name)) || Boolean(form.querySelector(`[name="${name}"]:checked[value="${values.join('"], [name="' + name + '"]:checked[value="')}"]`));
+        element.classList.toggle('hidden', !active);
+      });
+    };
+
+    const updateSummary = () => {
+      if (!summary) return;
+      summary.innerHTML = [
+        ['Tipo de necesidad', selected('serviceType')],
+        ['Objetivo', valueOf('objective') || 'Sin respuesta'],
+        ['Situación actual', selected('currentSituation')],
+        ['Contenidos', checkedList('contentTypes')],
+        ['Usuarios', checkedList('userTypes')],
+        ['Migración', selected('migrationRequired')],
+        ['Etapa', selected('projectStage')],
+        ['Plazo', valueOf('targetTimeframe') ? readLabel('targetTimeframe', valueOf('targetTimeframe')) : 'Sin respuesta'],
+        ['Presupuesto', valueOf('estimatedBudget') ? readLabel('estimatedBudget', valueOf('estimatedBudget')) : 'Sin respuesta'],
+        ['Contacto', `${valueOf('name') || 'Sin nombre'} · ${valueOf('organization') || 'Sin organización'} · ${valueOf('email') || 'Sin correo'}`],
+      ].map(([term, description]) => `<div><strong class="text-brand-navy">${term}:</strong> ${description}</div>`).join('');
+    };
+
+    const showStep = (index) => {
+      currentStep = Math.max(0, Math.min(index, steps.length - 1));
+      steps.forEach((step, stepIndex) => step.classList.toggle('hidden', stepIndex !== currentStep));
+      if (progress) progress.textContent = `Paso ${currentStep + 1} de ${steps.length}`;
+      prev?.toggleAttribute('disabled', currentStep === 0);
+      next?.classList.toggle('hidden', currentStep === steps.length - 1);
+      if (currentStep === steps.length - 1) updateSummary();
+      updateConditionals();
+    };
+
+    const validateVisibleStep = () => {
+      const fields = Array.from(steps[currentStep]?.querySelectorAll('input, select, textarea') || []);
+      return fields.every((field) => !(field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement) || field.reportValidity());
+    };
+
+    form.addEventListener('input', updateConditionals);
+    form.addEventListener('change', updateConditionals);
+    prev?.addEventListener('click', () => showStep(currentStep - 1));
+    next?.addEventListener('click', () => {
+      if (validateVisibleStep()) showStep(currentStep + 1);
+    });
+    form.addEventListener('submit', () => {
+      if (submit instanceof HTMLButtonElement) submit.disabled = true;
+      if (status) status.textContent = 'Enviando antecedentes...';
+    });
+
+    showStep(0);
+  }
+</script>

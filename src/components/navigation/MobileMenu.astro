@@ -1,0 +1,17 @@
+---
+import { navItems, site } from '../../data/site';
+---
+
+<details class="relative lg:hidden">
+  <summary class="flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-center rounded-control border border-border text-brand-navy marker:hidden" aria-label="Abrir menu">
+    <span aria-hidden="true" class="text-2xl leading-none">≡</span>
+  </summary>
+  <nav class="absolute right-0 mt-3 w-72 rounded-card border border-border bg-surface p-3 shadow-sm" aria-label="Navegacion movil">
+    {navItems.map((item) => (
+      <a class="block rounded-control px-4 py-3 font-bold text-brand-navy hover:bg-page" href={item.href}>{item.label}</a>
+    ))}
+    <a class="mt-2 block rounded-full bg-brand-orange px-4 py-3 text-center font-black text-white" target="_blank" href={site.bookingUrl}>
+      Agendar reunión
+    </a>
+  </nav>
+</details>

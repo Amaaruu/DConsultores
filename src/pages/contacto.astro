@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectBriefForm from '../components/forms/ProjectBriefForm.astro';
+import Button from '../components/content/Button.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout seo={{ title: 'Contacto', description: 'Agenda una reunion o cuentanos tu proyecto mediante un brief inicial.', path: '/contacto/' }}>
+  <section class="bg-page py-section-sm">
+    <div class="mx-auto grid max-w-content gap-10 px-5 sm:px-6 md:grid-cols-[0.8fr_1.2fr] lg:px-8">
+      <div>
+        <p class="font-black uppercase tracking-wide text-brand-orange">Contacto</p>
+        <h1 class="mt-3 text-4xl font-black text-brand-navy md:text-5xl">Inicia una conversación.</h1>
+        <p class="mt-5 leading-8 text-muted">La via principal es agendar una reunion. Como segunda opcion, cuentanos tu proyecto mediante un brief breve antes de cotizar o reunirnos.</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row md:flex-col">
+          <Button target="_blank" href={site.bookingUrl}>Agendar una reunión</Button>
+          <Button href="#project-brief" variant="secondary">Cuéntanos tu proyecto</Button>
+        </div>
+      </div>
+      <ProjectBriefForm />
+    </div>
+  </section>
+</BaseLayout>

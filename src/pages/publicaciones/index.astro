@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/content/PostCard.astro';
+const posts = (await getCollection('posts')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout seo={{ title: 'Publicaciones', description: 'Articulos de D-Consultores sobre repositorios digitales, infraestructura, plataformas e IA aplicada.', path: '/publicaciones/' }}>
+  <section class="bg-page py-section-sm">
+    <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-black text-brand-navy md:text-5xl">Publicaciones</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">Notas, guias y aprendizajes para tecnologia institucional mantenible.</p>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {posts.map((post) => <PostCard post={post} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

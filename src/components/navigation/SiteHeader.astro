@@ -1,0 +1,20 @@
+---
+import Logo from './Logo.astro';
+import MobileMenu from './MobileMenu.astro';
+import { navItems, site } from '../../data/site';
+---
+
+<header class="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
+  <div class="mx-auto flex max-w-wide items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
+    <Logo />
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Navegacion principal">
+      {navItems.map((item) => (
+        <a class="text-sm font-bold text-brand-navy hover:text-brand-orange" href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+    <a class="hidden rounded-full bg-brand-orange px-5 py-3 text-sm font-black text-white transition hover:bg-brand-orange-dark lg:inline-flex" target="_blank" href={site.bookingUrl}>
+      Agendar reunión
+    </a>
+    <MobileMenu />
+  </div>
+</header>

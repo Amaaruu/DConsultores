@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout seo={{ title: 'Politica de privacidad', description: 'Politica de privacidad de D-Consultores.', path: '/privacidad/' }}>
+  <section class="bg-surface py-section-sm">
+    <div class="prose mx-auto max-w-reading px-5 sm:px-6 lg:px-8">
+      <h1>Política de privacidad</h1>
+      <p>D-Consultores recopila los datos enviados mediante el formulario de contacto para responder solicitudes comerciales o tecnicas.</p>
+      <h2>Datos recopilados</h2>
+      <p>Nombre, organizacion, correo electronico, tipo de proyecto, mensaje y datos tecnicos minimos necesarios para seguridad del formulario.</p>
+      <h2>Uso y conservacion</h2>
+      <p>Los datos se usan para responder la solicitud y se conservan solo durante el tiempo necesario para gestionar la comunicacion.</p>
+      <h2>Proveedores</h2>
+      <p>El sitio puede usar Cloudflare para hosting, seguridad y analitica agregada, Cloudflare Turnstile para proteccion antibots y Resend para correo transaccional.</p>
+      <h2>Derechos</h2>
+      <p>Para solicitar rectificacion o eliminacion de datos, escribe a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
