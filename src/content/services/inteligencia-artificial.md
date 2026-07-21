@@ -1,5 +1,5 @@
 ---
-title: "Inteligencia artificial aplicada a documentos y conocimiento institucional"
+title: "Inteligencia Artificial aplicada a bases documentales"
 shortTitle: "Inteligencia artificial aplicada"
 description: "Exploramos e implementamos búsqueda semántica, asistencia documental y recuperación aumentada por contexto con control de acceso y trazabilidad."
 order: 9

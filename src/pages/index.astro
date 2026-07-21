@@ -17,101 +17,126 @@ const featuredServices = services.filter((service) => service.data.featured).sli
 const projectCandidates = (await getCollection('projects')).slice(0, 2);
 ---
 
-<BaseLayout seo={{ title: 'Plataformas digitales para preservar, organizar y conectar conocimiento', description: site.description, path: '/' }}>
+<BaseLayout seo={{ title: 'Especialistas en DSpace y Repositorios Digitales', description: site.description, path: '/' }}>
+  
+  <!-- Hero Banner Principal -->
   <section class="bg-surface py-section-sm md:py-section-lg">
-    <div class="mx-auto grid max-w-wide gap-12 px-5 sm:px-6 md:grid-cols-[1.05fr_0.95fr] md:items-center lg:px-8">
-      <div>
-        <p class="font-black uppercase tracking-wide text-brand-orange">Sistemas digitales de información y conocimiento</p>
-        <h1 class="mt-4 text-4xl font-black tracking-normal text-brand-navy md:text-6xl">Plataformas digitales para preservar, organizar y conectar conocimiento.</h1>
-        <p class="mt-6 max-w-2xl text-lg leading-8 text-muted">Diseñamos, implementamos y mantenemos repositorios digitales, bibliotecas, plataformas de datos y soluciones de información para universidades, organismos públicos y organizaciones.</p>
+    <div class="mx-auto max-w-wide px-5 sm:px-6 lg:px-8">
+      <div class="max-w-4xl">
+        <p class="font-black uppercase tracking-wide text-brand-orange">Especialistas en DSpace y Repositorios Digitales</p>
+        <h1 class="mt-4 text-4xl font-black tracking-normal text-brand-navy md:text-6xl">
+          Arquitectura, desarrollo y continuidad para repositorios institucionales.
+        </h1>
+        <p class="mt-6 text-lg leading-8 text-muted">
+          Implementamos, actualizamos y damos soporte experto a plataformas DSpace, bibliotecas digitales y sistemas de información para universidades y organismos públicos.
+        </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Button target="_blank" href={site.bookingUrl}>Agendar una reunión</Button>
           <Button href="/contacto/#project-brief" variant="secondary">Cuéntanos tu proyecto</Button>
-          <a href="/servicios/" class="font-black text-brand-navy underline decoration-brand-orange decoration-2">Conocer servicios</a>
-        </div>
-      </div>
-      <div class="rounded-card border border-border bg-page p-6">
-        <div class="grid gap-4">
-          {featuredServices.map((service, index) => (
-            <div class="flex items-start gap-4 rounded-control bg-surface p-4">
-              <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-orange-soft font-black text-brand-orange">0{index + 1}</span>
-              <div>
-                <p class="font-black text-brand-navy">{service.data.shortTitle}</p>
-                <p class="mt-1 text-sm leading-6 text-muted">{service.data.description}</p>
-              </div>
-            </div>
-          ))}
+          <a href="/servicios/" class="font-black text-brand-navy underline decoration-brand-orange decoration-2">Ver servicios</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Franja de especialidades clave -->
   <section class="bg-page py-8">
     <div class="mx-auto max-w-content px-5 text-center text-sm font-black uppercase tracking-wide text-brand-navy sm:px-6 lg:px-8">
-      Repositorios digitales · Datos de investigación · Desarrollo e integraciones · Soporte y continuidad operativa
+      DSpace · Dataverse · Repositorios Institucionales · Datos de Investigación · DevOps y Soporte
     </div>
   </section>
 
+  <!-- Servicios Principales -->
   <section class="bg-surface py-section-sm">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
       <p class="font-black uppercase tracking-wide text-brand-orange">Servicios principales</p>
-      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Soluciones especializadas para información digital.</h2>
-      <p class="mt-4 max-w-3xl leading-8 text-muted">Acompañamos todo el ciclo de una plataforma: levantamiento, arquitectura, implementación, personalización, migración, integración, capacitación, soporte y evolución.</p>
+      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">
+        Ingeniería y soporte para ecosistemas de información.
+      </h2>
+      <p class="mt-4 max-w-3xl leading-8 text-muted">
+        Acompañamos todo el ciclo técnico y funcional: arquitectura, implementación en DSpace, migración de datos, personalización avanzada y soporte continuo.
+      </p>
       <div class="mt-10 grid gap-4 md:grid-cols-2">
         {featuredServices.map((service) => <ServiceCard service={service} />)}
       </div>
     </div>
   </section>
 
+  <!-- Diferenciadores -->
   <section class="bg-page py-section-sm">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
-      <p class="font-black uppercase tracking-wide text-brand-orange">Diferenciadores</p>
-      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Especialización para plataformas que deben mantenerse disponibles.</h2>
-      <div class="mt-10 grid gap-4 md:grid-cols-4">
-        {['Experiencia especializada', 'Trabajo de principio a fin', 'Tecnologías abiertas', 'Transferencia de capacidades'].map((item) => (
-          <article class="border-t border-border pt-5">
-            <h3 class="font-black text-brand-navy">{item}</h3>
-            <p class="mt-3 text-sm leading-6 text-muted">Decisiones documentadas, estándares abiertos y operación sostenible para instituciones.</p>
+      <p class="font-black uppercase tracking-wide text-brand-orange">El valor de un equipo experto</p>
+      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Especialización técnica para infraestructuras críticas.</h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-4">
+        {[
+          { title: 'Experiencia en DSpace', desc: 'Dominio profundo de la plataforma, arquitectura backend y componentes frontend.' },
+          { title: 'Ciclo completo', desc: 'Desde el levantamiento inicial de metadatos hasta la puesta en marcha y evolución.' },
+          { title: 'Estándares abiertos', desc: 'Tecnologías y protocolos interoperables (OAI-PMH, ORCID, DOI) sin ataduras.' },
+          { title: 'Transferencia', desc: 'Capacitación y documentación técnica para que su equipo domine la plataforma.' }
+        ].map((item) => (
+          <article class="group rounded-card border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-lg">
+            <h3 class="font-black text-brand-navy transition-colors duration-300 group-hover:text-brand-orange">{item.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-muted">{item.desc}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- Proyectos / Experiencia -->
   <section class="bg-surface py-section-sm">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
-      <p class="font-black uppercase tracking-wide text-brand-orange">Proyectos</p>
-      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Referencias heredadas en revisión editorial.</h2>
-      <p class="mt-4 max-w-3xl leading-8 text-muted">Los casos recuperados desde WordPress se muestran como candidatos hasta confirmar autorización, alcance e imágenes.</p>
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div class="max-w-3xl">
+          <p class="font-black uppercase tracking-wide text-brand-orange">Casos de Éxito</p>
+          <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Plataformas que impulsan el conocimiento.</h2>
+          <p class="mt-4 leading-8 text-muted">Explora cómo hemos ayudado a instituciones públicas y universidades a modernizar su gestión documental y repositorios académicos con altos estándares de rendimiento y seguridad.</p>
+        </div>
+        <a href="/proyectos/" class="shrink-0 font-black text-brand-navy underline decoration-brand-orange decoration-2 hover:text-brand-orange transition-colors">Ver todos los proyectos</a>
+      </div>
+      
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
         {projectCandidates.map((project) => <ProjectCard project={project} />)}
       </div>
     </div>
   </section>
 
+  <!-- Forma de trabajo -->
   <section class="bg-page py-section-sm">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
-      <p class="font-black uppercase tracking-wide text-brand-orange">Forma de trabajo</p>
-      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Un proceso claro desde el diagnóstico hasta la continuidad.</h2>
-      <div class="mt-10 grid gap-4 md:grid-cols-3">
-        {['Comprender', 'Diseñar', 'Implementar', 'Validar', 'Transferir', 'Mantener'].map((step) => (
-          <article class="border-l-4 border-brand-orange bg-surface p-5">
-            <h3 class="font-black text-brand-navy">{step}</h3>
-            <p class="mt-2 text-sm leading-6 text-muted">Etapa de trabajo con objetivos, evidencia y próximos pasos claros.</p>
+      <p class="font-black uppercase tracking-wide text-brand-orange">Nuestra Metodología</p>
+      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Un proceso estructurado para garantizar continuidad.</h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {[
+          { num: '01', title: 'Comprender', desc: 'Análisis de requerimientos, volúmenes de datos y objetivos institucionales.' },
+          { num: '02', title: 'Diseñar', desc: 'Definición de arquitectura, perfiles de metadatos y estrategia de integración.' },
+          { num: '03', title: 'Implementar', desc: 'Configuración de DSpace, migraciones seguras y puesta a punto del entorno.' },
+          { num: '04', title: 'Validar', desc: 'Pruebas rigurosas de rendimiento, seguridad (hardening) y accesibilidad.' },
+          { num: '05', title: 'Transferir', desc: 'Capacitación al equipo interno y entrega de documentación operativa.' },
+          { num: '06', title: 'Mantener', desc: 'Monitoreo preventivo, gestión de respaldos y soporte evolutivo continuo.' }
+        ].map((item) => (
+          <article class="group flex flex-col justify-center rounded-r-card border-l-4 border-border bg-surface p-6 transition-all duration-300 hover:border-brand-orange hover:shadow-md">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl font-black text-brand-orange-soft transition-colors duration-300 group-hover:text-brand-orange">{item.num}</span>
+              <h3 class="text-lg font-black text-brand-navy">{item.title}</h3>
+            </div>
+            <p class="mt-3 text-sm leading-6 text-muted">{item.desc}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- Publicaciones -->
   <section class="bg-surface py-section-sm">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
-      <p class="font-black uppercase tracking-wide text-brand-orange">Publicaciones</p>
-      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Notas recientes sobre tecnología institucional.</h2>
+      <p class="font-black uppercase tracking-wide text-brand-orange">Publicaciones técnicas</p>
+      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Notas recientes sobre tecnología y repositorios.</h2>
       <div class="mt-10 grid gap-5 md:grid-cols-3">
         {posts.map((post) => <PostCard post={post} />)}
       </div>
     </div>
   </section>
+
   <BookingCTA />
 </BaseLayout>

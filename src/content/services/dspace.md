@@ -1,5 +1,5 @@
 ---
-title: "Implementación, actualización y soporte especializado DSpace"
+title: "Arquitectura, implementación y soporte en DSpace"
 shortTitle: "DSpace"
 description: "Acompañamos proyectos DSpace desde la definición inicial hasta la operación continua, incluyendo implementación, migración, personalización, integraciones, actualización y soporte."
 order: 2

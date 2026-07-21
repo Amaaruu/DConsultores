@@ -26,4 +26,4 @@ Un repositorio digital sostenible no empieza con la instalacion. Empieza con reg
 
 ## Resultado esperado
 
-La tecnologia debe permitir publicar, preservar y encontrar informacion sin convertir cada cambio en un proyecto de emergencia.
+La tecnologia debe permitir publicar, preservar y encontrar informacion sin convertir cada cambio en un proyecto de emergencia. 

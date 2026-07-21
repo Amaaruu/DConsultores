@@ -1,5 +1,5 @@
 ---
-title: "Soporte técnico para plataformas críticas de información"
+title: "Soporte y continuidad operativa para plataformas críticas"
 shortTitle: "Soporte y continuidad"
 description: "Ayudamos a mantener plataformas estables, seguras y disponibles mediante mantención preventiva y correctiva, monitoreo, optimización y evolución controlada."
 order: 6
