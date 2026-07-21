@@ -3,12 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingCTA from '../components/content/BookingCTA.astro';
 import { company } from '../data/company';
 
-const principles = ['Especialización', 'Sostenibilidad', 'Interoperabilidad', 'Seguridad y continuidad', 'Transferencia'];
+const principles = [
+  { num: '01', title: 'Conocimiento experto', desc: 'Nos enfocamos exclusivamente en ecosistemas de información, repositorios y bibliotecas digitales institucionales.' },
+  { num: '02', title: 'Plataformas duraderas', desc: 'Construimos soluciones escalables y sostenibles, diseñadas para perdurar en el tiempo sin rediseños constantes.' },
+  { num: '03', title: 'Estándares abiertos', desc: 'Garantizamos que tu información se conecte libremente, evitando la dependencia de tecnologías o proveedores cerrados.' },
+  { num: '04', title: 'Continuidad asegurada', desc: 'Reducimos riesgos manteniendo tus servicios operativos y seguros mediante infraestructura robusta y monitoreo preventivo.' },
+  { num: '05', title: 'Autonomía del cliente', desc: 'Capacitamos y transferimos todo el conocimiento necesario para que tu equipo tome el control total de la plataforma.' }
+];
+
 const team = [
   ['Hernán Lagos', 'Fundador y CEO. Ingeniero en Informática, especializado en repositorios, bibliotecas digitales, metadatos, arquitectura de software y plataformas DSpace.'],
   ['Simón Hernández', 'Desarrollador de sistemas de información, con experiencia en diseño de soluciones, software, bases documentales y sistemas de descubrimiento.'],
   ['Hernán Carvajal', 'Ingeniero Civil en Computación e Informática, especializado en dirección de proyectos, ingeniería de software, sistemas abiertos e infraestructura cloud.'],
-  ['Nidia Berríos', 'Diseñadora gráfica especializada en arquitectura de información, experiencia de usuario, interacción y desarrollo frontend.'],
+  ['Isaac González', 'Diseñador gráfico especializado en arquitectura de información, experiencia de usuario, interacción y desarrollo frontend.'],
 ];
 ---
 
@@ -31,11 +38,14 @@ const team = [
 
   <section class="bg-page py-section-sm">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-black text-brand-navy">Principios de trabajo</h2>
-      <div class="mt-8 grid gap-4 md:grid-cols-5">
+      <p class="font-black uppercase tracking-wide text-brand-orange">Nuestra filosofía</p>
+      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Principios de trabajo</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {principles.map((item) => (
-          <article class="border-t border-border pt-5">
-            <h3 class="font-black text-brand-navy">{item}</h3>
+          <article class="group rounded-card border border-border bg-surface p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-lg">
+            <span class="text-3xl font-black text-brand-orange-soft transition-colors duration-300 group-hover:text-brand-orange">{item.num}</span>
+            <h3 class="mt-4 text-xl font-black text-brand-navy">{item.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-muted">{item.desc}</p>
           </article>
         ))}
       </div>
@@ -44,17 +54,19 @@ const team = [
 
   <section class="bg-surface py-section-sm">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-black text-brand-navy">Equipo</h2>
+      <p class="font-black uppercase tracking-wide text-brand-orange">Nuestro Talento</p>
+      <h2 class="mt-3 text-3xl font-black text-brand-navy md:text-4xl">Equipo</h2>
       <p class="mt-4 max-w-3xl leading-8 text-muted">Perfiles iniciales sujetos a validación antes de publicación final.</p>
-      <div class="mt-8 grid gap-5 md:grid-cols-2">
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
         {team.map(([name, bio]) => (
-          <article class="rounded-card border border-border p-6">
-            <h3 class="text-xl font-black text-brand-navy">{name}</h3>
-            <p class="mt-3 leading-7 text-muted">{bio}</p>
+          <article class="group rounded-card border border-border bg-page p-6 transition-colors duration-300 hover:border-brand-orange/30 hover:bg-surface hover:shadow-sm">
+            <h3 class="text-xl font-black text-brand-navy group-hover:text-brand-orange transition-colors duration-300">{name}</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">{bio}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
+  
   <BookingCTA />
 </BaseLayout>
