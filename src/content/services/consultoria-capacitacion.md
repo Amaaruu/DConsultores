@@ -3,7 +3,7 @@ title: "Consultoría y transferencia de capacidades"
 shortTitle: "Consultoría y capacitación"
 description: "Acompañamos decisiones técnicas y funcionales, capacitamos a los equipos y dejamos documentación para operar y evolucionar soluciones."
 order: 10
-featured: false
+featured: true
 icon: "training"
 audiences: ["Equipos funcionales", "Bibliotecas", "Equipos TI", "Direcciones de proyecto"]
 capabilities: ["Diagnóstico", "Relevamiento", "Arquitectura", "Metadatos", "Capacitaciones", "Manuales"]

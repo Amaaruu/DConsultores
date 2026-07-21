@@ -1,4 +1,7 @@
 ---
+cover:
+  src: "src/assets/UCT.webp"
+  alt: "Imagen UCT"
 title: "Repositorio Académico — Universidad Católica de Temuco"
 client: "Universidad Católica de Temuco"
 clientDisplay: true

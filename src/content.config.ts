@@ -10,23 +10,19 @@ const posts = defineCollection({
     updatedDate: z.coerce.date().optional(),
     author: z.string().default('D-Consultores'),
     tags: z.array(z.string()).default([]),
-    cover: z
-      .object({
+    cover: z.object({
         src: z.string(),
         alt: z.string().min(1),
-      })
-      .optional(),
+      }).optional(),
     draft: z.boolean().default(false),
     canonicalUrl: z.string().url().optional(),
     featured: z.boolean().default(false),
-    video: z
-      .object({
+    video: z.object({
         provider: z.enum(['youtube', 'cloudflare']),
         id: z.string(),
         title: z.string(),
         thumbnail: z.string().optional(),
-      })
-      .optional(),
+      }).optional(),
   }),
 });
 
@@ -39,6 +35,10 @@ const services = defineCollection({
     order: z.number(),
     featured: z.boolean().default(false),
     icon: z.string().default('repository'),
+    cover: z.object({
+        src: z.string(),
+        alt: z.string().min(1),
+    }).optional(),
     audiences: z.array(z.string()).default([]),
     capabilities: z.array(z.string()).default([]),
     relatedServices: z.array(z.string()).default([]),
@@ -63,12 +63,10 @@ const projects = defineCollection({
     capabilities: z.array(z.string()).default([]),
     technologies: z.array(z.string()).default([]),
     result: z.string().optional(),
-    cover: z
-      .object({
+    cover: z.object({
         src: z.string(),
         alt: z.string().min(1),
-      })
-      .optional(),
+      }).optional(),
     publicUrl: z.string().url().optional(),
     publicationApproved: z.boolean().default(false),
     draft: z.boolean().default(true),

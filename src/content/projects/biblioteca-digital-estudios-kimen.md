@@ -1,4 +1,7 @@
 ---
+cover:
+  src: "src/assets/Kimen.webp"
+  alt: "Imagen Kimen"
 title: "Biblioteca Digital de Estudios Kimen"
 client: "Por confirmar"
 clientDisplay: false

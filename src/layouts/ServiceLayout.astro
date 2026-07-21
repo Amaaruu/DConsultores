@@ -10,28 +10,27 @@ const { service, related = [] } = Astro.props;
   <article class="bg-surface py-section-sm md:py-section-lg">
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
       
-      <!-- Navegación de migas de pan -->
       <Breadcrumbs items={[{ href: '/servicios/', label: 'Servicios' }, { label: service.data.shortTitle }]} />
       
-      <!-- Cabecera del Servicio -->
       <div class="mt-6 max-w-4xl">
         <p class="font-black uppercase tracking-wide text-brand-orange">Servicio Especializado</p>
         <h1 class="mt-3 text-4xl font-black tracking-normal text-brand-navy md:text-5xl">{service.data.title}</h1>
         <p class="mt-5 text-lg leading-8 text-muted">{service.data.description}</p>
       </div>
 
-      <!-- Cuerpo principal y Barra Lateral (Grid de 2 columnas) -->
+      {service.data.cover && (
+        <div class="mt-8 overflow-hidden rounded-card border border-border shadow-sm">
+          <img src={service.data.cover.src} alt={service.data.cover.alt} class="h-64 w-full object-cover md:h-96" loading="eager" />
+        </div>
+      )}
+
       <div class="mt-12 grid gap-10 lg:grid-cols-[1fr_20rem] lg:items-start">
         
-        <!-- Contenido Markdown principal con tipografía enriquecida (.prose) -->
         <div class="prose rounded-card border border-border/60 bg-page p-6 sm:p-8">
           <slot />
         </div>
 
-        <!-- Barra lateral de fichas técnicas -->
         <aside class="sticky top-24 grid gap-6">
-          
-          <!-- Ficha de Capacidades -->
           <div class="rounded-card border border-border bg-surface p-6 shadow-sm">
             <h2 class="text-base font-black uppercase tracking-wider text-brand-navy">Capacidades técnicas</h2>
             <ul class="mt-4 grid gap-3 text-sm text-muted">
@@ -58,7 +57,6 @@ const { service, related = [] } = Astro.props;
             )}
           </div>
 
-          <!-- Mini tarjeta de contacto rápido en la barra lateral -->
           <div class="rounded-card bg-brand-navy p-6 text-white shadow-sm">
             <h3 class="font-black">¿Requiere esta solución?</h3>
             <p class="mt-2 text-xs leading-5 text-white/75">Conversemos sobre los requerimientos técnicos de su institución.</p>
@@ -66,11 +64,9 @@ const { service, related = [] } = Astro.props;
               {service.data.cta}
             </a>
           </div>
-
         </aside>
       </div>
 
-      <!-- Servicios Relacionados -->
       {related.length > 0 && (
         <section class="mt-16 border-t border-border pt-10">
           <h2 class="text-2xl font-black text-brand-navy">Servicios relacionados</h2>
@@ -87,6 +83,5 @@ const { service, related = [] } = Astro.props;
     </div>
   </article>
 
-  <!-- CTA Global inferior -->
   <BookingCTA title={service.data.cta} />
 </BaseLayout>

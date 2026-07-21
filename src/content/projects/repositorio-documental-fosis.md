@@ -1,4 +1,7 @@
 ---
+cover:
+  src: "src/assets/fosis.webp"
+  alt: "Imagen Fosis"
 title: "Repositorio Documental FOSIS"
 client: "FOSIS"
 clientDisplay: true

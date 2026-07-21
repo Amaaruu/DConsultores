@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/content/PostCard.astro';
+
 const posts = (await getCollection('posts')).filter((post) => !post.data.draft).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
@@ -10,7 +11,7 @@ const posts = (await getCollection('posts')).filter((post) => !post.data.draft).
     <div class="mx-auto max-w-content px-5 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-black text-brand-navy md:text-5xl">Publicaciones</h1>
       <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">Notas, guias y aprendizajes para tecnologia institucional mantenible.</p>
-      <div class="mt-10 grid gap-5 md:grid-cols-2">
+      <div class="mt-10 flex flex-col gap-6">
         {posts.map((post) => <PostCard post={post} />)}
       </div>
     </div>

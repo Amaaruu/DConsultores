@@ -13,7 +13,7 @@ const posts = (await getCollection('posts'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 const services = (await getCollection('services')).filter((service) => !service.data.draft).sort((a, b) => a.data.order - b.data.order);
-const featuredServices = services.filter((service) => service.data.featured).slice(0, 4);
+const featuredServices = services.filter((service) => service.data.featured).slice(0, 6);
 const projectCandidates = (await getCollection('projects')).slice(0, 2);
 ---
 
@@ -56,7 +56,7 @@ const projectCandidates = (await getCollection('projects')).slice(0, 2);
       <p class="mt-4 max-w-3xl leading-8 text-muted">
         Acompañamos todo el ciclo técnico y funcional: arquitectura, implementación en DSpace, migración de datos, personalización avanzada y soporte continuo.
       </p>
-      <div class="mt-10 grid gap-4 md:grid-cols-2">
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
         {featuredServices.map((service) => <ServiceCard service={service} />)}
       </div>
     </div>

@@ -1,4 +1,7 @@
 ---
+cover:
+  src: "src/assets/Dipress.webp"
+  alt: "Imagen Dipres"
 title: "Biblioteca Digital DIPRES"
 client: "DIPRES"
 clientDisplay: true

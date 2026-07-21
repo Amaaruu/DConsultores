@@ -4,14 +4,35 @@ const data = project.data ?? project;
 const href = project.id && data.publicationApproved ? `/proyectos/${project.id}/` : undefined;
 ---
 
-<article class="rounded-card border border-border bg-surface p-6">
-  <p class="text-sm font-bold text-brand-orange">{data.clientDisplay === false ? 'Caso candidato' : data.client}</p>
-  <h2 class="mt-2 text-2xl font-black text-brand-navy">
-    {href ? <a href={href} class="hover:text-brand-orange">{data.title}</a> : data.title}
-  </h2>
-  <p class="mt-4 leading-7 text-muted">{data.description ?? data.context}</p>
-  {data.result && <p class="mt-4 text-sm font-bold text-ink">Resultado: {data.result}</p>}
-  <ul class="mt-5 flex flex-wrap gap-2">
-    {(data.technologies ?? data.capabilities ?? []).map((item: string) => <li class="rounded-full bg-page px-3 py-1 text-xs font-bold text-brand-navy">{item}</li>)}
-  </ul>
+<article class="group relative flex flex-col overflow-hidden rounded-card border border-border bg-surface p-6 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-brand-orange/50 hover:shadow-lg">
+  
+  <div class="flex flex-1 flex-col">
+    <p class="text-sm font-bold text-brand-orange">{data.clientDisplay === false ? 'Caso candidato' : data.client}</p>
+    <h2 class="mt-2 text-2xl font-black text-brand-navy">
+      {href ? <a href={href} class="hover:text-brand-orange before:absolute before:inset-0">{data.title}</a> : data.title}
+    </h2>
+    
+    <p class="mt-4 leading-7 text-muted">{data.description ?? data.context}</p>
+    
+    {data.result && <p class="mt-4 text-sm font-bold text-ink">Resultado: {data.result}</p>}
+
+    {data.cover ? (
+      <div class="mt-6 flex justify-center overflow-hidden rounded-control">
+        <img src={data.cover.src.replace('src/assets/', '/images/').replace('./', '/')} alt={data.cover.alt} class="h-auto max-h-48 w-auto object-contain" loading="lazy" />
+      </div>
+    ) : (
+      <div class="mt-6 flex h-40 w-full items-center justify-center rounded-control border border-border bg-brand-navy-soft text-white/20">
+        <svg class="size-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      </div>
+    )}
+    
+    <ul class="relative z-10 mt-auto flex flex-wrap gap-2 pt-6">
+      {(data.technologies ?? data.capabilities ?? []).map((item: string) => (
+        <li class="rounded-full bg-page px-3 py-1 text-xs font-bold text-brand-navy transition-colors duration-300 group-hover:text-brand-orange">{item}</li>
+      ))}
+    </ul>
+  </div>
+  
 </article>
