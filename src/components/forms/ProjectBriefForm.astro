@@ -74,15 +74,15 @@ const today = new Date().toISOString().slice(0, 10);
 
   <fieldset data-brief-step class="grid gap-5">
     <legend class="text-xl font-black text-brand-navy">¿En qué podemos ayudarte?</legend>
-    <div class="grid gap-3 sm:grid-cols-2">
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
       {serviceTypes.map((value) => (
-        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
+        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink hover:border-brand-orange/50 transition-colors cursor-pointer">
           <input type="radio" name="serviceType" value={value} required />
           {labels[value]}
         </label>
       ))}
     </div>
-    <div class="grid gap-2" data-conditional="serviceType:otro">
+    <div class="grid gap-2 mt-2" data-conditional="serviceType:otro">
       <label class="font-bold text-brand-navy" for="serviceTypeOther">Describe brevemente la necesidad</label>
       <input class="min-h-11 rounded-control border border-border px-3" id="serviceTypeOther" name="serviceTypeOther" maxlength="100" />
     </div>
@@ -90,20 +90,22 @@ const today = new Date().toISOString().slice(0, 10);
 
   <fieldset data-brief-step class="grid gap-5">
     <legend class="text-xl font-black text-brand-navy">Objetivo y situación actual</legend>
-    <div class="grid gap-2">
+    <div class="grid gap-2 mt-4">
       <label class="font-bold text-brand-navy" for="objective">¿Qué necesitas resolver con este proyecto?</label>
       <textarea class="min-h-36 rounded-control border border-border px-3 py-3" id="objective" name="objective" required minlength="20" maxlength="1500"></textarea>
     </div>
     <div class="grid gap-3">
       <p class="font-bold text-brand-navy">¿Actualmente existe una plataforma o sistema relacionado?</p>
-      {currentSituations.map((value) => (
-        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
-          <input type="radio" name="currentSituation" value={value} required />
-          {labels[value]}
-        </label>
-      ))}
+      <div class="grid gap-3 sm:grid-cols-2">
+        {currentSituations.map((value) => (
+          <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink hover:border-brand-orange/50 transition-colors cursor-pointer">
+            <input type="radio" name="currentSituation" value={value} required />
+            {labels[value]}
+          </label>
+        ))}
+      </div>
     </div>
-    <div class="grid gap-2" data-conditional="currentSituation:mejorar,actualizar,migrar-reemplazar">
+    <div class="grid gap-2 mt-2" data-conditional="currentSituation:mejorar,actualizar,migrar-reemplazar">
       <label class="font-bold text-brand-navy" for="currentPlatform">¿Qué plataforma o sistema utilizan actualmente?</label>
       <input class="min-h-11 rounded-control border border-border px-3" id="currentPlatform" name="currentPlatform" maxlength="200" />
     </div>
@@ -111,38 +113,40 @@ const today = new Date().toISOString().slice(0, 10);
 
   <fieldset data-brief-step class="grid gap-5">
     <legend class="text-xl font-black text-brand-navy">Contenidos, usuarios y migración</legend>
-    <div class="grid gap-3">
+    <div class="grid gap-3 mt-4">
       <p class="font-bold text-brand-navy">¿Qué tipo de contenidos administrará la plataforma?</p>
       <div class="grid gap-2 sm:grid-cols-2">
         {contentTypes.map((value) => (
-          <label class="flex gap-3 rounded-control border border-border p-3 text-sm text-ink">
+          <label class="flex gap-3 rounded-control border border-border p-3 text-sm text-ink hover:border-brand-orange/50 transition-colors cursor-pointer">
             <input type="checkbox" name="contentTypes" value={value} />
             {labels[value]}
           </label>
         ))}
       </div>
     </div>
-    <div class="grid gap-3">
+    <div class="grid gap-3 mt-2">
       <p class="font-bold text-brand-navy">¿Quiénes utilizarán la plataforma?</p>
       <div class="grid gap-2 sm:grid-cols-2">
         {userTypes.map((value) => (
-          <label class="flex gap-3 rounded-control border border-border p-3 text-sm text-ink">
+          <label class="flex gap-3 rounded-control border border-border p-3 text-sm text-ink hover:border-brand-orange/50 transition-colors cursor-pointer">
             <input type="checkbox" name="userTypes" value={value} />
             {labels[value]}
           </label>
         ))}
       </div>
     </div>
-    <div class="grid gap-3">
+    <div class="grid gap-3 mt-2">
       <p class="font-bold text-brand-navy">¿Es necesario migrar información desde otro sistema?</p>
-      {migrationOptions.map((value) => (
-        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
-          <input type="radio" name="migrationRequired" value={value} required />
-          {labels[value]}
-        </label>
-      ))}
+      <div class="grid gap-3 sm:grid-cols-2">
+        {migrationOptions.map((value) => (
+          <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink hover:border-brand-orange/50 transition-colors cursor-pointer">
+            <input type="radio" name="migrationRequired" value={value} required />
+            {labels[value]}
+          </label>
+        ))}
+      </div>
     </div>
-    <div class="grid gap-4 md:grid-cols-2" data-conditional="migrationRequired:yes">
+    <div class="grid gap-4 md:grid-cols-2 mt-2" data-conditional="migrationRequired:yes">
       <label class="grid gap-2 font-bold text-brand-navy">Sistema o fuente de origen<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="migrationSource" maxlength="300" /></label>
       <label class="grid gap-2 font-bold text-brand-navy">Cantidad aproximada de registros<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="approximateRecords" maxlength="300" /></label>
       <label class="grid gap-2 font-bold text-brand-navy">Cantidad aproximada de archivos<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="approximateFiles" maxlength="300" /></label>
@@ -152,27 +156,29 @@ const today = new Date().toISOString().slice(0, 10);
 
   <fieldset data-brief-step class="grid gap-5">
     <legend class="text-xl font-black text-brand-navy">Estado, plazo y presupuesto</legend>
-    <div class="grid gap-3">
+    <div class="grid gap-3 mt-4">
       <p class="font-bold text-brand-navy">¿En qué etapa se encuentra el proyecto?</p>
-      {projectStages.map((value) => (
-        <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink">
-          <input type="radio" name="projectStage" value={value} required />
-          {labels[value]}
-        </label>
-      ))}
+      <div class="grid gap-3 sm:grid-cols-2">
+        {projectStages.map((value) => (
+          <label class="flex gap-3 rounded-control border border-border p-3 text-sm font-bold text-ink hover:border-brand-orange/50 transition-colors cursor-pointer">
+            <input type="radio" name="projectStage" value={value} required />
+            {labels[value]}
+          </label>
+        ))}
+      </div>
     </div>
-    <div class="grid gap-2">
+    <div class="grid gap-2 mt-2">
       <label class="font-bold text-brand-navy" for="targetTimeframe">¿Cuándo necesitas que el proyecto esté operativo?</label>
       <select class="min-h-11 rounded-control border border-border px-3" id="targetTimeframe" name="targetTimeframe">
         <option value="">Selecciona una opción</option>
         {targetTimeframes.map((value) => <option value={value}>{labels[value]}</option>)}
       </select>
     </div>
-    <div class="grid gap-2" data-conditional="targetTimeframe:fecha-especifica">
+    <div class="grid gap-2 mt-2" data-conditional="targetTimeframe:fecha-especifica">
       <label class="font-bold text-brand-navy" for="targetDate">Fecha objetivo</label>
       <input class="min-h-11 rounded-control border border-border px-3" id="targetDate" name="targetDate" type="date" min={today} />
     </div>
-    <div class="grid gap-2">
+    <div class="grid gap-2 mt-2">
       <label class="font-bold text-brand-navy" for="estimatedBudget">¿Existe un presupuesto estimado?</label>
       <select class="min-h-11 rounded-control border border-border px-3" id="estimatedBudget" name="estimatedBudget">
         <option value="">Selecciona una opción</option>
@@ -183,18 +189,20 @@ const today = new Date().toISOString().slice(0, 10);
 
   <fieldset data-brief-step class="grid gap-5">
     <legend class="text-xl font-black text-brand-navy">Datos de contacto</legend>
-    <label class="grid gap-2 font-bold text-brand-navy">Nombre y apellido<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="name" autocomplete="name" required minlength="2" maxlength="100" /></label>
-    <label class="grid gap-2 font-bold text-brand-navy">Empresa u organización<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="organization" autocomplete="organization" required minlength="2" maxlength="150" /></label>
-    <label class="grid gap-2 font-bold text-brand-navy">Cargo, opcional<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="role" maxlength="100" /></label>
-    <label class="grid gap-2 font-bold text-brand-navy">Correo electrónico<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="email" type="email" autocomplete="email" required maxlength="254" /></label>
-    <label class="grid gap-2 font-bold text-brand-navy">Teléfono, opcional<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="phone" autocomplete="tel" maxlength="30" /></label>
-    <label class="grid gap-2 font-bold text-brand-navy">Comentarios adicionales, opcional<textarea class="min-h-28 rounded-control border border-border px-3 py-3 font-normal" name="additionalComments" maxlength="2000"></textarea></label>
+    <div class="mt-4 grid gap-5">
+      <label class="grid gap-2 font-bold text-brand-navy">Nombre y apellido<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="name" autocomplete="name" required minlength="2" maxlength="100" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Empresa u organización<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="organization" autocomplete="organization" required minlength="2" maxlength="150" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Cargo, opcional<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="role" maxlength="100" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Correo electrónico<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Teléfono, opcional<input class="min-h-11 rounded-control border border-border px-3 font-normal" name="phone" autocomplete="tel" maxlength="30" /></label>
+      <label class="grid gap-2 font-bold text-brand-navy">Comentarios adicionales, opcional<textarea class="min-h-28 rounded-control border border-border px-3 py-3 font-normal" name="additionalComments" maxlength="2000"></textarea></label>
+    </div>
     <div class="hidden" aria-hidden="true">
       <label for="website">Sitio web</label>
       <input id="website" name="website" tabindex="-1" autocomplete="off" />
     </div>
-    {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey}></div>}
-    <label class="flex gap-3 text-sm leading-6 text-muted">
+    {turnstileKey && <div class="cf-turnstile mt-2" data-sitekey={turnstileKey}></div>}
+    <label class="flex gap-3 text-sm leading-6 text-muted mt-2 cursor-pointer">
       <input class="mt-1 size-4" type="checkbox" name="privacyConsent" required />
       Acepto que D-Consultores utilice estos datos para responder mi solicitud.
     </label>
@@ -202,18 +210,18 @@ const today = new Date().toISOString().slice(0, 10);
 
   <fieldset data-brief-step class="grid gap-5">
     <legend class="text-xl font-black text-brand-navy">Revisión y envío</legend>
-    <div data-brief-summary class="grid gap-3 rounded-control bg-page p-4 text-sm leading-6 text-muted">
+    <div data-brief-summary class="mt-4 grid gap-3 rounded-control bg-page p-4 text-sm leading-6 text-muted">
       Completa los pasos anteriores para revisar tus respuestas.
     </div>
     <p data-brief-status class="text-sm font-bold text-muted" role="status" aria-live="polite"></p>
-    <button data-brief-submit class="min-h-11 rounded-full bg-brand-orange px-5 py-3 font-black text-white hover:bg-brand-orange-dark" type="submit">
+    <button data-brief-submit class="min-h-11 rounded-full bg-brand-orange px-5 py-3 font-black text-white hover:bg-brand-orange-dark transition-colors" type="submit">
       Enviar brief
     </button>
   </fieldset>
 
-  <div data-brief-controls class="hidden items-center justify-between gap-3 border-t border-border pt-5">
-    <button data-brief-prev class="min-h-11 rounded-full border border-brand-navy px-5 py-3 text-sm font-black text-brand-navy" type="button">Atrás</button>
-    <button data-brief-next class="min-h-11 rounded-full bg-brand-navy px-5 py-3 text-sm font-black text-white" type="button">Siguiente</button>
+  <div data-brief-controls class="hidden items-center justify-between gap-3 border-t border-border pt-5 mt-2">
+    <button data-brief-prev class="min-h-11 rounded-full border border-brand-navy px-5 py-3 text-sm font-black text-brand-navy transition-colors hover:bg-brand-navy hover:text-white" type="button">Atrás</button>
+    <button data-brief-next class="min-h-11 rounded-full bg-brand-navy px-5 py-3 text-sm font-black text-white transition-colors hover:bg-brand-navy/90" type="button">Siguiente</button>
   </div>
 </form>
 

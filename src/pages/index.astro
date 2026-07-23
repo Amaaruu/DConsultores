@@ -22,18 +22,23 @@ const projectCandidates = (await getCollection('projects')).slice(0, 2);
   <!-- Hero Banner Principal -->
   <section class="bg-surface py-section-sm md:py-section-lg">
     <div class="mx-auto max-w-wide px-5 sm:px-6 lg:px-8">
-      <div class="max-w-4xl">
-        <p class="font-black uppercase tracking-wide text-brand-orange">Especialistas en DSpace y Repositorios Digitales</p>
-        <h1 class="mt-4 text-4xl font-black tracking-normal text-brand-navy md:text-6xl">
-          Arquitectura, desarrollo y continuidad para repositorios institucionales.
-        </h1>
-        <p class="mt-6 text-lg leading-8 text-muted">
-          Implementamos, actualizamos y damos soporte experto a plataformas DSpace, bibliotecas digitales y sistemas de información para universidades y organismos públicos.
-        </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Button target="_blank" href={site.bookingUrl}>Agendar una reunión</Button>
-          <Button href="/contacto/#project-brief" variant="secondary">Cuéntanos tu proyecto</Button>
-          <a href="/servicios/" class="font-black text-brand-navy underline decoration-brand-orange decoration-2">Ver servicios</a>
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p class="font-black uppercase tracking-wide text-brand-orange">Especialistas en DSpace y Repositorios Digitales</p>
+          <h1 class="mt-4 text-4xl font-black tracking-normal text-brand-navy md:text-6xl">
+            Arquitectura, desarrollo y continuidad para repositorios institucionales.
+          </h1>
+          <p class="mt-6 text-lg leading-8 text-muted">
+            Implementamos, actualizamos y damos soporte experto a plataformas DSpace, bibliotecas digitales y sistemas de información para universidades y organismos públicos.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button target="_blank" href={site.bookingUrl}>Agendar una reunión</Button>
+            <Button href="/contacto/#project-brief" variant="secondary">Cuéntanos tu proyecto</Button>
+            <a href="/servicios/" class="font-black text-brand-navy underline decoration-brand-orange decoration-2">Ver servicios</a>
+          </div>
+        </div>
+        <div class="relative flex w-full justify-center lg:justify-end">
+          <img src="/images/banner.webp" alt="Especialistas en DSpace y Repositorios Digitales" class="h-auto w-full max-w-lg object-contain lg:max-w-none" loading="eager" fetchpriority="high" />
         </div>
       </div>
     </div>

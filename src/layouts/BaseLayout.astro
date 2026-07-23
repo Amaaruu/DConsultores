@@ -17,6 +17,9 @@ const { seo } = Astro.props as { seo: SeoInput };
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SeoHead {...seo} />
     <JsonLd data={organizationJsonLd()} />
+    <script is:inline>
+      document.documentElement.classList.add('js-ready');
+    </script>
   </head>
   <body>
     <SkipLink />
@@ -25,5 +28,22 @@ const { seo } = Astro.props as { seo: SeoInput };
       <slot />
     </main>
     <SiteFooter />
+    
+    <script is:inline>
+      document.querySelectorAll('main h1, main h2, main p:not(.prose p), main article, main form, main aside, .prose').forEach(el => el.classList.add('scroll-reveal'));
+    </script>
+    
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -50px 0px", threshold: 0.1 });
+
+      document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
   </body>
 </html>
